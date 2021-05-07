@@ -1,5 +1,8 @@
 Project Summery:
 
+runnig code:
+To run the code on your browser and play the looper you might download the zip folder from gitHub, open it on any edditor and run npm i on the terminal in order to pluggin the node module.
+
 On Machine Looper project i have build a loop music machine. my goal was to build a machine which contains 9 pads which every single pad contain a diffrent sound while the player is able to control the sounds and make a cool music by playing with the pads and control the sounds.
 Beside, the player is able to record his list and lister to it over and over.
 
