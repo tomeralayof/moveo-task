@@ -1,18 +1,21 @@
 Project Summery:
 
-Routers And Components:
-The project contains 3 main components:
+On Machine Looper project i have build a loop music machine. my goal was to build a machine which contains 9 pads which every single pad contain a diffrent sound while the player is able to control the sounds and make a cool music by playing with the pads and control the sounds.
+Beside, the player is able to record his list and lister to it over and over.
 
-1. PadApp Component - Father Component of PadList component. contains all the fanctionality and states of the project and send send it to its children by props.
-2. PadList Compnent - Children of PadApp component and father of PadPreview component. contains the pad state variable and togglePlat function which enables the click button. PadList looping all pads by the number of existing objects inside the array
-3. PadPreview Component - Children of PadList cmponent. Its goal is to render the pads into the browser including the onClick function.
-   //service: include the array of object pattern and general functions being used inside the project which are related to the array of object.
+The project contains 3 buttons and 9 pads(every pad has his own button to control the played music.)
 
-Hooks:
-[pads,setPads] => responsible on the pads array of object which comes from the service.
-[isPlayed, setIsPlayed] => responsible on the play button which unables the all pads.
-[playlist, setPlaylist] => contain the list of played pads.
+Pad button:
+The pad button is initially activates the specific pad which is clicked. Actually, it has some other roles:
 
-Functions:
-togglePlay() => unable each and every pad to be activated and play the audio or diable after another click if the pad is already activate. breaks the function if is played is false.
-resetPlaylist() => disable all activate pads by changing the const isPlayed to be false by mapping the new array of pads and setting the pads to be false.
+1. enable the pad animation.
+2. play the sound
+3. double click will make the sound again inside the looper/
+
+Reset button:
+The reset button resets the looper and by clicking play straight forward it will not play the previous looper played.
+
+Record button:
+Recording the pattern and put the record inside a list below the looper.
+
+Hope you all enjoyed playing with the looper!

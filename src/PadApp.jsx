@@ -15,10 +15,12 @@ export const PadApp = () => {
     setPads(loadPads);
   }, []);
 
+  //operate the sound function
   useEffect(() => {
     playSounds(playlist);
   }, [playlist, isPlayed]);
 
+  //enable the sound if exist.
   const playSounds = (list) => {
     console.log(list);
     if (!list.length) return;
@@ -34,7 +36,7 @@ export const PadApp = () => {
     }
   };
 
-  //works like play sound but only on the saved songs.
+  //play the saved songs
   const playSaved = (list, isPlaying) => {
     console.log("list", list);
     console.log("isPlayed", isPlayed);
@@ -51,6 +53,7 @@ export const PadApp = () => {
     }
   };
 
+  //pause and reset the pads while clicking the pause button
   const resetPlaylist = () => {
     playlist.forEach((pad) => {
       pad.audio.pause();
@@ -64,15 +67,18 @@ export const PadApp = () => {
     setPlaylist([]);
   };
 
+  //activate the pad and play the music while play is on.
   const togglePad = (id) => {
     if (!isPlayed) return;
     let currPad = PadService.findById(id);
+    // active/not active while clicking.
     currPad.isActive = !currPad.isActive;
     let newPads = PadService.save(currPad);
     setPads([...newPads]);
     updatePlayList(currPad);
   };
 
+  //update the array of list in order to play them while playing the songs(box to operate above.).
   const updatePlayList = (currPad) => {
     let newList = [...playlist];
     if (currPad.isActive) {
