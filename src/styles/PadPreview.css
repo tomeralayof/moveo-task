@@ -1,0 +1,21 @@
+@keyframes animate {
+  0% {
+    background-position: 0%;
+  }
+  100% {
+    background-position: 400%;
+  }
+}
+
+.pad-preview .pad {
+  height: 60px;
+  width: 60px;
+  background: linear-gradient(90deg, #03a9f4, #f441a5, #ffeb3b, #03a9f4);
+  background-size: 400%;
+  cursor: pointer;
+  margin: 5px;
+}
+
+.pad.active {
+  animation: animate 12s linear infinite;
+}
