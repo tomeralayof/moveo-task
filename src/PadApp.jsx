@@ -95,15 +95,17 @@ export const PadApp = () => {
   return (
     <section className="pad-app">
       <h1>Machine Looper - Moveo Task </h1>
-      <button onClick={() => setIsPlayed(!isPlayed)}>
-        <i className={isPlayed ? "fas fa-pause" : "fas fa-play"}></i>
-      </button>
-      <button onClick={() => resetPlaylist()}>
-        <i className="fas fa-stop"></i>
-      </button>
-      <button onClick={() => saveRecord()}>
-        <i className="fas fa-record-vinyl"></i>
-      </button>
+      <div className="flex-container">
+        <button onClick={() => setIsPlayed(!isPlayed)}>
+          <i className={isPlayed ? "fas fa-pause" : "fas fa-play"}></i>
+        </button>
+        <button onClick={() => resetPlaylist()}>
+          <i className="fas fa-stop"></i>
+        </button>
+        <button onClick={() => saveRecord()}>
+          <i className="fas fa-record-vinyl"></i>
+        </button>
+      </div>
       <PadList togglePad={togglePad} pads={pads} />
       <Recordings recordList={recordList} playSaved={playSaved} />
     </section>
