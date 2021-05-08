@@ -4,44 +4,54 @@ import { PadService } from "./services/PadService";
 import { Recordings } from "./components/recordings";
 
 export const PadApp = () => {
+  //hooks
   const [pads, setPads] = useState([]);
   const [isPlayed, setIsPlayed] = useState(false);
   const [playlist, setPlaylist] = useState([]);
   const [recordList, setRecordList] = useState([]);
 
+  //pad array of objects.
   const loadPads = PadService.query();
 
+  //set the array of objects.
   useEffect(() => {
     setPads(loadPads);
   }, []);
 
-  //operate the sound function
+  //activate/dis activate the pad.
+  const togglePad = (id) => {
+    if (!isPlayed) return;
+    let currPad = PadService.findById(id);
+    currPad.isActive = !currPad.isActive;
+    let newPads = PadService.save(currPad);
+    setPads([...newPads]);
+    updatePlayList(currPad);
+  };
+
+  //update the array of playList
+  const updatePlayList = (currPad) => {
+    let newList = [...playlist];
+    if (currPad.isActive) {
+      newList.push(currPad);
+      setPlaylist(newList);
+    } else {
+      let filteredList = newList.filter((pad) => {
+        return pad.id !== currPad.id;
+      });
+      setPlaylist(filteredList);
+    }
+  };
+
+  // play/pause sounds rendering.
   useEffect(() => {
     playSounds(playlist);
   }, [playlist, isPlayed]);
 
-  //enable the sound if exist.
+  // play/pause sound
   const playSounds = (list) => {
     console.log(list);
     if (!list.length) return;
     if (isPlayed) {
-      list.forEach((pad) => {
-        pad.audio.play();
-        pad.audio.playbackRate = 1.2;
-      });
-    } else {
-      list.forEach((pad) => {
-        pad.audio.pause();
-      });
-    }
-  };
-
-  //play the saved songs
-  const playSaved = (list, isPlaying) => {
-    console.log("list", list);
-    console.log("isPlayed", isPlayed);
-    if (!list.length) return;
-    if (isPlaying) {
       list.forEach((pad) => {
         pad.audio.play();
         pad.audio.playbackRate = 1.2;
@@ -67,35 +77,28 @@ export const PadApp = () => {
     setPlaylist([]);
   };
 
-  //activate the pad and play the music while play is on.
-  const togglePad = (id) => {
-    if (!isPlayed) return;
-    let currPad = PadService.findById(id);
-    // active/not active while clicking.
-    currPad.isActive = !currPad.isActive;
-    let newPads = PadService.save(currPad);
-    setPads([...newPads]);
-    updatePlayList(currPad);
-  };
-
-  //update the array of list in order to play them while playing the songs(box to operate above.).
-  const updatePlayList = (currPad) => {
-    let newList = [...playlist];
-    if (currPad.isActive) {
-      newList.push(currPad);
-      setPlaylist(newList);
-    } else {
-      let filteredList = newList.filter((pad) => {
-        return pad.id !== currPad.id;
-      });
-      setPlaylist(filteredList);
-    }
-  };
-
+  //copy of play to set the records.
   const saveRecord = () => {
     let newList = [...recordList];
     newList.push([...playlist]);
     setRecordList(newList);
+  };
+
+  //play the saved songs
+  const playSaved = (list, isPlaying) => {
+    // console.log("list", list);
+    // console.log("isPlayed", isPlayed);
+    if (!list.length) return;
+    if (isPlaying) {
+      list.forEach((pad) => {
+        pad.audio.play();
+        pad.audio.playbackRate = 1.2;
+      });
+    } else {
+      list.forEach((pad) => {
+        pad.audio.pause();
+      });
+    }
   };
 
   return (

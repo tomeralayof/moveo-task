@@ -12,7 +12,7 @@ export const Recordings = ({ recordList, playSaved }) => {
           playSaved(list, isPlaying);
         }}
       >
-        {`${idx + 1} play list `}
+        {` play list ${idx + 1} `}
       </li>
     );
   });

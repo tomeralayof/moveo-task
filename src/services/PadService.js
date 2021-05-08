@@ -54,6 +54,16 @@ const gPads =[
   }
 ]
 
+//provide randon id for every id key inside the array.
+function _makeId(){
+  let id = "";
+  let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+  for(let i=0;i<5;i++){
+    id+=possible.charAt(Math.floor(Math.random()*possible.length));
+  }
+  return id;
+};
+
 //return the array of objects.
 function query(){
  return gPads;
@@ -73,12 +83,4 @@ function save(padToSave){
   return gPads
 }
 
-//provide randon id for every id key inside the array.
-function _makeId(){
-  let id = "";
-  let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  for(let i=0;i<5;i++){
-    id+=possible.charAt(Math.floor(Math.random()*possible.length));
-  }
-  return id;
-};
+
