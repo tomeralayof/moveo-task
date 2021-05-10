@@ -16,6 +16,7 @@ export const PadApp = () => {
   //set the array of objects.
   useEffect(() => {
     setPads(loadPads);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   //activate/dis activate the pad.
@@ -45,11 +46,12 @@ export const PadApp = () => {
   // play/pause sounds rendering.
   useEffect(() => {
     playSounds(playlist);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playlist, isPlayed]);
 
   // play/pause sound
   const playSounds = (list) => {
-    console.log(list);
+    // console.log(list);
     if (!list.length) return;
     if (isPlayed) {
       list.forEach((pad) => {
